@@ -4,4 +4,6 @@ What about mean:
 - /start - welcome message
 - /alls - all manga  in my archive 
 - /already - manga that were read
-- /now book who's read now
+- /now - book who's read now
+- /help - about
+ -/take - Choose what book you read to next step
