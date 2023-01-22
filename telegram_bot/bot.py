@@ -51,7 +51,7 @@
     
     
     
-    
+import message_text 
 import logging
 import os
 from telegram import Update
@@ -72,13 +72,25 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     await context.bot.send_message(
         chat_id=effective_chat.id, 
-        text="Привіт,я бот, який допоможе вибрати тобі найкращу мангу!")
+        text=message_text.GREETINGS)
+    
+async def help(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    effective_chat = update.effective_chat
+    if not effective_chat:
+        logger.warning("effective_chat is None")
+        return
+    await context.bot.send_message(
+        chat_id=effective_chat.id, 
+        text=message_text.HELP)
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token('5539579648:AAGWzUQ4Z49Es4ptW_garrxSCdstzNSeMr8').build()
     
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
+    
+    help_handler = CommandHandler('help', help)
+    application.add_handler(help_handler)
     
     application.run_polling()
     
